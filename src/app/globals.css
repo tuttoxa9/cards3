@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Темная основа с синеватым оттенком */
+    --background: 242 11% 7%;
+    --foreground: 0 0% 98%;
+
+    /* Стеклянные панели */
+    --card: 242 11% 9%;
+    --card-foreground: 0 0% 95%;
+    --popover: 242 11% 9%;
+    --popover-foreground: 0 0% 95%;
+
+    /* Неоновые акценты */
+    --primary: 200 100% 50%; /* Электрический синий */
+    --primary-foreground: 242 11% 7%;
+    --secondary: 285 100% 50%; /* Фуксия */
+    --secondary-foreground: 242 11% 7%;
+    --accent: 180 100% 50%; /* Бирюзовый */
+    --accent-foreground: 242 11% 7%;
+
+    /* Приглушенные элементы */
+    --muted: 242 11% 12%;
+    --muted-foreground: 0 0% 65%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 242 11% 15%;
+    --input: 242 11% 12%;
+    --ring: 200 100% 50%;
+    --radius: 1.5rem;
+
+    /* Голографические цвета */
+    --holographic-1: 280 100% 70%;
+    --holographic-2: 200 100% 60%;
+    --holographic-3: 320 100% 65%;
+    --holographic-4: 160 100% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground overflow-x-hidden;
+    font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-orbitron), var(--font-inter), sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Glassmorphism панели */
+  .glass-panel {
+    @apply backdrop-blur-xl bg-white/5 border border-white/10 shadow-2xl;
+    box-shadow:
+      0 8px 32px 0 rgba(31, 38, 135, 0.37),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+  }
+
+  /* Эффект свечения для кнопок */
+  .neon-glow {
+    @apply transition-all duration-300;
+    filter: drop-shadow(0 0 10px currentColor);
+  }
+
+  .neon-glow:hover {
+    filter: drop-shadow(0 0 20px currentColor);
+  }
+
+  /* Голографический градиент */
+  .holographic-bg {
+    background: linear-gradient(
+      45deg,
+      hsl(var(--holographic-1)) 0%,
+      hsl(var(--holographic-2)) 25%,
+      hsl(var(--holographic-3)) 50%,
+      hsl(var(--holographic-4)) 75%,
+      hsl(var(--holographic-1)) 100%
+    );
+    background-size: 300% 300%;
+    animation: holographic-shift 3s ease-in-out infinite;
+  }
+
+  @keyframes holographic-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  /* Анимация появления при скролле */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* 3D эффект для карточек */
+  .card-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease-out;
+  }
+
+  .card-3d:hover {
+    transform: translateY(-10px) rotateX(10deg);
+  }
+}
