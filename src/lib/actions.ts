@@ -1,11 +1,11 @@
 'use server';
 
-import { D1Database } from '@cloudflare/d1';
+import { Database } from '@cloudflare/d1';
 import { revalidatePath } from 'next/cache';
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
 // D1 Setup
-const db = process.env.DB as D1Database;
+const db = process.env.DB as Database;
 
 // R2 Setup
 const R2_BUCKET_NAME = process.env.R2_BUCKET_NAME!;
