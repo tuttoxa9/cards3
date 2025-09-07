@@ -1,9 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  serverActions: true,
-  experimental: {
-    serverComponentsExternalPackages: ['@cloudflare/d1'],
-  },
+  serverExternalPackages: ['@cloudflare/d1'],
   allowedDevOrigins: ["*.preview.same-app.com"],
   images: {
     unoptimized: true,
