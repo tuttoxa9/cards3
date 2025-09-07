@@ -37,8 +37,8 @@ export async function getAllCards(): Promise<Card[]> {
     return [];
   }
   try {
-    const { results } = await db.prepare('SELECT * FROM cards').all<Card>();
-    return results || [];
+    const { results } = await db.prepare('SELECT * FROM cards').all();
+    return (results as Card[]) || [];
   } catch (e: unknown) {
     if (e instanceof Error) {
         console.error('Failed to fetch cards:', e.message);
