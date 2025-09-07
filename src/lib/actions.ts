@@ -39,13 +39,21 @@ export async function getAllCards(): Promise<Card[]> {
   try {
     const { results } = await db.prepare('SELECT * FROM cards').all<Card>();
     return results || [];
-  } catch (e: any) {
-    console.error('Failed to fetch cards:', e.message);
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+        console.error('Failed to fetch cards:', e.message);
+    } else {
+        console.error('An unknown error occurred while fetching cards');
+    }
     return [];
   }
 }
 
-export async function createCard(prevState: any, formData: FormData) {
+interface CreateCardState {
+    message: string;
+}
+
+export async function createCard(prevState: CreateCardState, formData: FormData): Promise<CreateCardState> {
   const name = formData.get('name') as string;
   const description = formData.get('description') as string;
   const rarity = formData.get('rarity') as string;
@@ -78,8 +86,11 @@ export async function createCard(prevState: any, formData: FormData) {
 
     revalidatePath('/admincard');
     return { message: 'Карточка успешно создана.' };
-  } catch (e: any) {
-    console.error(e);
-    return { message: `Ошибка при создании карточки: ${e.message}` };
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+        console.error(e);
+        return { message: `Ошибка при создании карточки: ${e.message}` };
+    }
+    return { message: 'Произошла неизвестная ошибка при создании карточки.' };
   }
 }
