@@ -10,6 +10,9 @@
     "format": "bunx biome format --write"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.883.0",
+    "@cloudflare/d1": "^1.4.1",
+    "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-slot": "^1.2.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
