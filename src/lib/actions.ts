@@ -5,7 +5,7 @@ import { revalidatePath } from 'next/cache';
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
 // D1 Setup
-const db = process.env.DB as Database;
+const db = process.env.DB as unknown as Database;
 
 // R2 Setup
 const R2_BUCKET_NAME = process.env.R2_BUCKET_NAME!;
